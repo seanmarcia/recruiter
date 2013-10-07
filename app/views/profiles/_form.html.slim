@@ -1,3 +1,4 @@
+p.help-block Note: <span class="glyphicon glyphicon-asterisk text-danger"></span> indicates a required field.
 = form_for(resource, url: (params[:action] == :edit ? edit_user_profile_path : user_profile_path)) do |f|
   - if resource.errors.any?
     div.alert.alert-danger
@@ -11,49 +12,74 @@
     fieldset
       legend Personal information
       div.form-group
-        = f.label :first_name, class: 'control-label col-sm-2'
+        = f.label :first_name, 'First name <span class="glyphicon glyphicon-asterisk text-danger"></span>'.html_safe,
+          class: 'control-label col-sm-2'
         div.col-sm-8
           = f.text_field :first_name,
             class: 'form-control',
             maxlength: 30
             autofocus: true
       div.form-group
-        = f.label :last_name, class: 'control-label col-sm-2'
+        = f.label :last_name, 'Last name <span class="glyphicon glyphicon-asterisk text-danger"></span>'.html_safe,
+          class: 'control-label col-sm-2'
         div.col-sm-8
           = f.text_field :last_name,
             class: 'form-control',
             maxlength: 30
       div.form-group
-        = f.label :gender, class: 'control-label col-sm-2'
+        = f.label :student, class: 'control-label col-sm-2'
+        div.col-sm-8
+          = f.check_box :student,
+            class: 'checkbox'
+      div.form-group
+        = f.label :id_number, 'ID number <span class="glyphicon glyphicon-asterisk text-danger"></span>'.html_safe,
+          class: 'control-label col-sm-2'
+        div.col-sm-8
+          = f.text_field :id_number,
+            class: 'form-control',
+            maxlength: 30
+          span.help-block
+            | For WSU students, please use your WildCat ID starting with a "W";
+            |  for non-students, please use your driver's license number.
+      div.form-group
+        = f.label :gender, 'Gender <span class="glyphicon glyphicon-asterisk text-danger"></span>'.html_safe,
+          class: 'control-label col-sm-2'
         div.col-sm-8
           = f.select :gender,
             options_for_select(['M','F'], resource.gender),
             prompt: '-',
             class: 'form-control'
       div.form-group
-        = f.label :age, class: 'control-label col-sm-2'
+        = f.label :age, 'Age <span class="glyphicon glyphicon-asterisk text-danger"></span>'.html_safe,
+          class: 'control-label col-sm-2'
         div.col-sm-8
           = f.select :age,
-            options_for_select((18..80).to_a, resource.age),
+            options_for_select((1..100).to_a, resource.age),
             prompt: '--',
             class: 'form-control'
       div.form-group
-        = f.label :ethnicity, class: 'control-label col-sm-2'
+        = f.label :ethnicity, 'Race/ethnicity <span class="glyphicon glyphicon-asterisk text-danger"></span>'.html_safe,
+          class: 'control-label col-sm-2'
         div.col-sm-8
           = f.select :ethnicity,
-            options_for_select(%w[White Black Asian Hispanic Other], resource.ethnicity),
+            options_for_select(['White', 'Hispanic', 'Black or African-American',
+              'Asian', 'American-Indian or Alaskan Native',
+              'Native Hawaiian or other Pacific Islander', 'From multiple races',
+              'Other', 'Do not wish to disclose'], resource.ethnicity),
             prompt: 'Choose...',
             class: 'form-control'
       div.form-group
-        = f.label :profession, class: 'control-label col-sm-2'
+        = f.label :marital_status, 'Marital status <span class="glyphicon glyphicon-asterisk text-danger"></span>'.html_safe,
+          class: 'control-label col-sm-2'
         div.col-sm-8
-          = f.text_field :profession,
+          = f.select :marital_status,
+            options_for_select(['Single', 'Married', 'Separated', 'Divorced',
+              'Widowed', 'Other'], resource.marital_status),
+            prompt: 'Choose...',
             class: 'form-control'
-          span.help-block
-            | How do you usually answer the question, "What do you do for a
-            |  living?"
       div.form-group
-        = f.label :years_resident, class: 'control-label col-sm-2'
+        = f.label :years_resident, 'Years of residency',
+          class: 'control-label col-sm-2'
         div.col-sm-8
           = f.select :years_resident,
             options_for_select((1..10).to_a, resource.years_resident)
@@ -62,35 +88,62 @@
             |  one or less, and "10" for ten or more.
     fieldset
       legend Education information
+      span.help-block <span class="glyphicon glyphicon-asterisk text-danger"></span> All fields are required for students.
       div.form-group
         = f.label :class_year, class: 'control-label col-sm-2'
         div.col-sm-8
           = f.select :class_year,
-            options_for_select(%w[Freshman Sophomore Junior Senior] << 'Graduate Student', resource.class_year),
+            options_for_select(['Freshman', 'Sophomore', 'Junior', 'Senior',
+              'Graduate Student', 'Other'], resource.class_year),
             prompt: 'Choose...',
             class: 'form-control'
           span.help-block Your class year, according to your transcript.
       div.form-group
-        = f.label :total_years, class: 'control-label col-sm-2'
+        =f.label :college, class: 'control-label col-sm-2'
         div.col-sm-8
-          = f.select :total_years,
-            options_for_select((1..10).to_a, resource.total_years),
-            prompt: '--',
+          = f.select :college,
+            options_for_select(['College of Applied Science & Technology',
+              'College of Arts & Humanities',
+              'College of Business & Economics', 'College of Science',
+              'College of Social & Behavioral Science',
+              'College of Education', 'College of Health Professions',
+              'Other'], resource.college),
+            prompt: 'Choose...',
             class: 'form-control'
-          span.help-block Total years of study at ACME.
+          span.help-block What college houses your major field of study?
+    fieldset
+      legend Professional information
+      span.help-block <span class="glyphicon glyphicon-asterisk text-danger"></span> All fields are required for non-students.
       div.form-group
-        = f.label :year_started, class: 'control-label col-sm-2'
+        = f.label :job_title, class: 'control-label col-sm-2'
         div.col-sm-8
-          = f.select :year_started,
-            options_for_select(((Time.now.year.to_i - 10)..(Time.now.year.to_i)).to_a.reverse, resource.year_started),
-            prompt: '----',
+          = f.text_field :job_title, class: 'form-control', maxlength: 255
+      div.form-group
+        = f.label :industry, class: 'control-label col-sm-2'
+        div.col-sm-8
+          = f.text_field :industry, class: 'form-control', maxlength: 255
+      div.form-group
+        = f.label :degree, 'Education', class: 'control-label col-sm-2'
+        div.col-sm-8
+          = f.select :degree,
+            options_for_select(['Less than highschool',
+              'Highschool diploma or equivalent',
+              'Some college but no degree', 'Associate\'s degree',
+              'Bachelor\'s degree',
+              'Master\'s degree or other professional degree',
+              'Doctoral degree'], resource.degree),
+            prompt: 'Choose...',
             class: 'form-control'
       div.form-group
-        = f.label :current_gpa, class: 'control-label col-sm-2'
+        = f.label :income, 'Annual income', class: 'control-label col-sm-2'
         div.col-sm-8
-          = f.text_field :current_gpa,
-            class: 'form-control',
-            value: number_with_precision(f.object.current_gpa, :precision => 2) || 0
+          = f.select :income,
+            options_for_select(['Less than $10k', '$10k to $19k', '$20k to $29k',
+              '$30k to $39k', '$40k to $49k', '$50k to $59k', '$60k to $69k',
+              '$70k to $79k', '$80k to $89k', '$90k to $99k',
+              'More than $100k'], resource.income),
+            prompt: 'Choose...',
+            class: 'form-control'
     fieldset
       legend Contact information
       div.form-group
@@ -100,10 +153,36 @@
             class: 'form-control',
             placeholder: 'user@example.com'
       div.form-group
-        = f.label :phone, class: 'control-label col-sm-2'
+        = f.label :phone, 'Phone <span class="glyphicon glyphicon-asterisk text-danger"></span>'.html_safe,
+        class: 'control-label col-sm-2'
         div.col-sm-8
           = f.phone_field :phone,
             class: 'form-control',
             maxlength: 14,
             data: { mask: '(999) 999-9999' }
+      div.form-group
+        = f.label :address1, 'Address <span class="glyphicon glyphicon-asterisk text-danger"></span>'.html_safe,
+          class: 'control-label col-sm-2'
+        div.col-sm-8
+          = f.text_field :address1, class: 'form-control', maxlength: 255
+      div.form-group
+        = f.label :address2, 'Address 2', class: 'control-label col-sm-2'
+        div.col-sm-8
+          = f.text_field :address2, class: 'form-control', maxlength: 255,
+            placeholder: 'Apartment/Mailbox number, etc.'
+      div.form-group
+        = f.label :city, 'City <span class="glyphicon glyphicon-asterisk text-danger"></span>'.html_safe,
+          class: 'control-label col-sm-2'
+        div.col-sm-8
+          = f.text_field :city, class: 'form-control', maxlength: 255
+      div.form-group
+        = f.label :state, 'State <span class="glyphicon glyphicon-asterisk text-danger"></span>'.html_safe,
+          class: 'control-label col-sm-2'
+        div.col-sm-8
+          = f.text_field :state, class: 'form-control', maxlength: 255
+      div.form-group
+        = f.label :zip, 'Zip code <span class="glyphicon glyphicon-asterisk text-danger"></span>'.html_safe,
+          class: 'control-label col-sm-2'
+        div.col-sm-8
+          = f.text_field :zip, class: 'form-control', maxlength: 5
     div= f.button 'Save', :type => 'submit', :class => 'btn btn-small btn-primary'

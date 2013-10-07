@@ -3,56 +3,94 @@ hr
 div.row
   div.col-sm-2
     b First name:
-  div.col-sm-8= resource.first_name
+  div.col-sm-10= resource.first_name
 div.row
   div.col-sm-2
     b Last name:
-  div.col-sm-8= resource.last_name
+  div.col-sm-10= resource.last_name
+div.row
+  div.col-sm-2
+    b Student
+  div.col-sm-10= resource.student ? "Yes" : "No"
+div.row
+  div.col-sm-2
+    b ID #:
+  div.col-sm-10= resource.id_number
 div.row
   div.col-sm-2
     b Gender:
-  div.col-sm-8= resource.gender
+  div.col-sm-10= resource.gender
 div.row
   div.col-sm-2
     b Age:
-  div.col-sm-8= resource.age
+  div.col-sm-10= resource.age
 div.row
   div.col-sm-2
-    b Ethnicity:
-  div.col-sm-8= resource.ethnicity
+    b Race/ethnicity:
+  div.col-sm-10= resource.ethnicity
 div.row
   div.col-sm-2
-    b Profession:
-  div.col-sm-8= resource.profession
+    b Marital status:
+  div.col-sm-10= resource.marital_status
 div.row
   div.col-sm-2
-    b Years resident:
-  div.col-sm-8= resource.years_resident
+    b Years of residency:
+  div.col-sm-10= resource.years_resident
 h3 Education information
 hr
 div.row
   div.col-sm-2
     b Class year:
-  div.col-sm-8= resource.class_year
+  div.col-sm-10= resource.class_year
 div.row
   div.col-sm-2
-    b Total years of study:
-  div.col-sm-8= resource.total_years
+    b College:
+  div.col-sm-10= resource.college
+h3 Professional information
+hr
 div.row
   div.col-sm-2
-    b Year started:
-  div.col-sm-8= resource.year_started
+    b Job title:
+  div.col-sm-10= resource.job_title
 div.row
   div.col-sm-2
-    b Current GPA:
-  div.col-sm-8= resource.current_gpa
+    b Industry:
+  div.col-sm-10= resource.industry
+div.row
+  div.col-sm-2
+    b Education:
+  div.col-sm-10= resource.degree
+div.row
+  div.col-sm-2
+    b Annual income:
+  div.col-sm-10= resource.income
 h3 Contact information
 hr
 div.row
   div.col-sm-2
     b Alternate email:
-  div.col-sm-8= resource.secondary_email
+  div.col-sm-10= resource.secondary_email
 div.row
   div.col-sm-2
     b Phone:
-  div.col-sm-8= resource.phone
+  div.col-sm-10= resource.phone
+div.row
+  div.col-sm-2
+    b Address:
+  div.col-sm-10= resource.address1
+div.row
+  div.col-sm-2
+    b Address 2:
+  div.col-sm-10= resource.address2
+div.row
+  div.col-sm-2
+    b City:
+  div.col-sm-10= resource.city
+div.row
+  div.col-sm-2
+    b State:
+  div.col-sm-10= resource.state
+div.row
+  div.col-sm-2
+    b Zip code:
+  div.col-sm-10= resource.zip

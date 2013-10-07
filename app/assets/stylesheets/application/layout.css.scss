@@ -16,6 +16,27 @@ textarea {
 }
 
 
+/* navbar */
+
+.logo {
+  margin-top: 15px;
+}
+
+.navbar-inverse {
+  background-color: #432965;
+  background-image: none;
+  background-repeat: none;
+}
+
+.navbar-inverse .navbar-brand {
+  color: #eeeeee;
+}
+
+.navbar-inverse .navbar-nav > li > a {
+  color: #eeeeee;
+}
+
+
 /* sticky footer */
 
 html,
@@ -24,7 +45,7 @@ body {
 }
 
 .wrapper {
-  padding-top: 50px; /* pushes the content below the navbar */
+  padding-top: 123px;
   padding-bottom: 20px; /* pushes up the last line of before footer */
   min-height:100%;
   position:relative;

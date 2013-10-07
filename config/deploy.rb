@@ -4,8 +4,6 @@ require 'mina/git'
 require 'mina/chruby'
 require 'mina/scp'
 
-server = ENV['to']
-
 # Manually create these paths in shared/ (eg: shared/config/database.yml) in your server.
 # They will be linked in the 'deploy:link_shared_paths' step.
 set :shared_paths, [
@@ -16,9 +14,10 @@ set :shared_paths, [
   'tmp'
 ]
 
+set :domain, 'experiments.weber.edu'
 set :deploy_to, '/u/apps/recruiter'
 set :repository, 'git@github.com:jrhorn424/recruiter.git'
-set :branch, 'master'
+set :branch, 'master-weber'
 set :app_root, File.expand_path('../../', __FILE__)
 set :application, 'recruiter'
 set :rails_env, 'production'
@@ -28,20 +27,6 @@ set :forward_agent, true
 # This task is the environment that is loaded for most commands, such as
 # `mina deploy` or `mina rake`.
 task :environment do
-  # Ensure that a server has been set
-  unless server
-    print_error "A server needs to be specified. (to=production or to=staging)"
-    exit
-  end
-
-  # Set the basic environment variables based on the server and version
-  case server
-  when 'staging'
-    set :domain, 'staging.ices-experiments.org'
-  when 'production'
-    set :domain, 'ices-experiments.org'
-  end
-
   invoke :'chruby[ruby-2.0]'
 end
 
@@ -62,7 +47,9 @@ end
 
 desc "Upload secret configuration files."
 task :config => :environment do
-  scp_upload "#{app_root}/config/{application,database}.yml", "#{deploy_to}/shared/config/", verbose: true
+  scp_upload "#{app_root}/config/application.yml.weber", "#{deploy_to}/shared/config/application.yml"
+  scp_upload "#{app_root}/config/database.yml.weber", "#{deploy_to}/shared/config/database.yml"
+
 end
 
 namespace :bower do

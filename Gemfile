@@ -30,6 +30,8 @@ gem 'whenever'      # manage cron jobs
 
 gem 'attribute_normalizer' # various utilities to clean data
 
+gem 'actionview-encoded_mail_to'
+
 group :production do
   gem 'unicorn', :require => false # production server
 end
