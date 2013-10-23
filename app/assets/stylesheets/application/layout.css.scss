@@ -1,9 +1,8 @@
 /* variables */
 
+$navbar-inverse-bg: #432965;
 $footer-height: 35px;
-$navbar-inverse-bg: #222;
-$navbar-inverse-color: #999;
-
+$navbar-inverse-color: #eeeeee;
 
 /* globals */
 
@@ -23,17 +22,17 @@ textarea {
 }
 
 .navbar-inverse {
-  background-color: #432965;
+  background-color: $navbar-inverse-bg;
   background-image: none;
   background-repeat: none;
 }
 
 .navbar-inverse .navbar-brand {
-  color: #eeeeee;
+  color: $navbar-inverse-color;
 }
 
 .navbar-inverse .navbar-nav > li > a {
-  color: #eeeeee;
+  color: $navbar-inverse-color;
 }
 
 
